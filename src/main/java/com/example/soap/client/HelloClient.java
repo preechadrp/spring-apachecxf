@@ -45,7 +45,5 @@ public class HelloClient {
 			System.out.println(e.getFaultInfo().getErrorMessage());
 		}
 
-
-
     }
 }
