@@ -22,8 +22,8 @@ public class HelloServiceImpl implements HelloService {
 					new BusinessFaultInfo("ERR001", "Name is required"));
 		}
 
-		log.info("userId : {}", authHeader.getUserId());
-		log.info("token : {}", authHeader.getToken());
+		log.info("userId = {}", authHeader.getUserId());
+		log.info("token = {}", authHeader.getToken());
 
 		HelloResponse resp = new HelloResponse();
 		resp.setMessage(request.getName());

@@ -32,8 +32,8 @@ public class AuthInterceptor extends AbstractSoapInterceptor {
 		String userId = element.getElementsByTagName("userId").item(0).getTextContent();
 		String token = element.getElementsByTagName("token").item(0).getTextContent();
 
-		log.info("userId={}", userId);
-		log.info("token={}", token);
+		log.info("userId = {}", userId);
+		log.info("token = {}", token);
 
 	}
 }
