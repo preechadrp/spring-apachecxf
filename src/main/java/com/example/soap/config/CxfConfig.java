@@ -1,6 +1,8 @@
 package com.example.soap.config;
 
 import org.apache.cxf.Bus;
+import org.apache.cxf.ext.logging.LoggingInInterceptor;
+import org.apache.cxf.ext.logging.LoggingOutInterceptor;
 import org.apache.cxf.jaxws.EndpointImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,6 +23,11 @@ public class CxfConfig {
 		endpoint.publish("/hello");
 
 		endpoint.getInInterceptors().add(new AuthInterceptor());
+
+		// log request
+		endpoint.getInInterceptors().add(new LoggingInInterceptor());
+		// log response
+		endpoint.getOutInterceptors().add(new LoggingOutInterceptor());
 
 		return endpoint;
 	}

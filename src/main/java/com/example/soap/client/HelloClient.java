@@ -1,7 +1,6 @@
 
 package com.example.soap.client;
 
-import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
 import org.springframework.stereotype.Component;
 
 import com.example.soap.service.AuthHeader;
@@ -16,15 +15,15 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 public class HelloClient {
 
+	private final HelloService helloServiceClient;
+
+	public HelloClient(
+			HelloService helloServiceClient) {
+
+		this.helloServiceClient = helloServiceClient;
+	}
+
     public void testCall() throws Exception {
-
-		JaxWsProxyFactoryBean factory = new JaxWsProxyFactoryBean();
-
-		factory.setServiceClass(HelloService.class);
-
-		factory.setAddress("http://localhost:8080/ws/hello");
-
-		HelloService client = (HelloService) factory.create();
 
         AuthHeader header = new AuthHeader();
         header.setUserId("john");
@@ -37,7 +36,7 @@ public class HelloClient {
 		HelloResponse response = null;
 		try {
 
-			response = client.sayHello(header, request);
+			response = helloServiceClient.sayHello(header, request);
 			log.info("response.getMessage() = {}", response.getMessage());
 
 		} catch (BusinessFault e) {
