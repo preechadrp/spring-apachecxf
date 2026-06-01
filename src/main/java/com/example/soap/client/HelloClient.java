@@ -5,7 +5,9 @@ import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
 import org.springframework.stereotype.Component;
 
 import com.example.soap.service.AuthHeader;
+import com.example.soap.service.BusinessFault;
 import com.example.soap.service.HelloRequest;
+import com.example.soap.service.HelloResponse;
 import com.example.soap.service.HelloService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -32,11 +34,18 @@ public class HelloClient {
 		request.setName("Preecha");
 		//request.setName(null);//test Fault
 
-		var response = client.sayHello(
-                        header,
-                        request);
+		HelloResponse response = null;
+		try {
 
-		log.info("response.getMessage() = {}", response.getMessage());
+			response = client.sayHello(header, request);
+			log.info("response.getMessage() = {}", response.getMessage());
+
+		} catch (BusinessFault e) {
+			System.out.println(e.getFaultInfo().getErrorCode());
+			System.out.println(e.getFaultInfo().getErrorMessage());
+		}
+
+
 
     }
 }
