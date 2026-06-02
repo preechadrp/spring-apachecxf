@@ -6,6 +6,7 @@ import org.apache.cxf.ext.logging.LoggingOutInterceptor;
 import org.apache.cxf.jaxws.EndpointImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
 
 import com.example.soap.service.AuthInterceptor;
 import com.example.soap.service.HelloServiceImpl;
@@ -14,6 +15,7 @@ import com.example.soap.service.HelloServiceImpl;
 public class CxfConfig {
 
 	@Bean
+	@DependsOn(Bus.DEFAULT_BUS_ID)
 	jakarta.xml.ws.Endpoint helloEndpoint(
 			Bus bus,
 			HelloServiceImpl service) {

@@ -28,7 +28,11 @@
 	<!-- TRACE, DEBUG, INFO, WARN, ERROR -->
 
 	<logger name="org.springframework" level="info" />
-	<logger name="org.apache.cxf" level="info" />
+	<!-- keep most CXF debug, but suppress noisy resource-resolution DEBUG stacktrace -->
+	<logger name="org.apache.cxf" level="debug" />
+	<!-- these CXF classes log a handled BeanCurrentlyInCreation exception at DEBUG; raise to WARN -->
+	<logger name="org.apache.cxf.resource.DefaultResourceManager" level="WARN" />
+	<logger name="org.apache.cxf.bus.spring.BusApplicationContextResourceResolver" level="WARN" />
 
 	<!-- Profile: dev -->
 	<springProfile name="dev">
